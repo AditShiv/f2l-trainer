@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F2L Trainer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    h1 {
+      text-align: center;
+    }
+    .alg-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .alg-card {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      width: 200px;
+    }
+    .alg-card input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>F2L Algorithm Trainer</h1>
+  <div class="alg-container" id="algContainer"></div>
+
+  <script>
+    const algorithms = [
+      { name: "F2L Case 1", alg: "U R U' R'" },
+      { name: "F2L Case 2", alg: "y' U' L' U L" },
+      { name: "F2L Case 3", alg: "R U R'" },
+      { name: "F2L Case 4", alg: "U' L' U L" },
+      // Add more cases as needed
+    ];
+
+    const container = document.getElementById("algContainer");
+
+    algorithms.forEach((item, index) => {
+      const card = document.createElement("div");
+      card.className = "alg-card";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = localStorage.getItem(`f2l-${index}`) === "true";
+      checkbox.addEventListener("change", () => {
+        localStorage.setItem(`f2l-${index}`, checkbox.checked);
+      });
+
+      const label = document.createElement("label");
+      label.textContent = `${item.name}: ${item.alg}`;
+
+      card.appendChild(checkbox);
+      card.appendChild(label);
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
