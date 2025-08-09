@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>F2L Trainer with Progress Save</title>
+  <title>F2L Corner & Edge in Top</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -10,7 +10,7 @@
       background: #f0f4f8;
     }
     .trainer {
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
     }
     .case {
@@ -61,8 +61,7 @@
       { class: 'green', label: 'Learnt (Green)' }
     ];
 
-    function toggleCaseStatus(el) {
-      const caseId = el.getAttribute('data-id');
+    function toggleCaseStatus(el, caseId) {
       let current = states.findIndex(s => el.classList.contains(s.class));
       let next = (current + 1) % states.length;
 
@@ -73,8 +72,7 @@
       localStorage.setItem(`caseStatus-${caseId}`, next);
     }
 
-    function restoreCaseStatus(el) {
-      const caseId = el.getAttribute('data-id');
+    function restoreCaseStatus(el, caseId) {
       let saved = localStorage.getItem(`caseStatus-${caseId}`);
       let index = saved !== null ? parseInt(saved) : 0;
 
@@ -82,53 +80,122 @@
       el.querySelector('.status-label').textContent = states[index].label;
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
+    window.onload = function() {
       const cases = document.querySelectorAll('.case');
-      cases.forEach(el => restoreCaseStatus(el));
-    });
+      cases.forEach((el, i) => restoreCaseStatus(el, i));
+    };
   </script>
 </head>
 <body>
   <div class="trainer">
-    <h1>F2L Basic Cases</h1>
+    <h1>F2L: Corner and Edge in Top</h1>
 
-    <div class="case" data-id="0" onclick="toggleCaseStatus(this)">
+    <!-- Repeat this block for each case -->
+    <div class="case" onclick="toggleCaseStatus(this, 0)">
       <h2>Case 1</h2>
       <div class="meta">
-        <p><strong>Step:</strong> F2L</p>
-        <p><strong>Algorithm:</strong> <span class="algo">R U R'</span></p>
+        <p><strong>Algorithm:</strong> <span class="algo">(U' R U') (R' U R) U R'</span></p>
       </div>
-      <img src="https://solvethecube.com/img/cubes/xbxxyxxxrxxbxbxxbxwxxxrxxrx.png" alt="F2L Case 1">
+      <img src="https://solvethecube.com/img/cubes/xxxxybxxrxxbxbxxbxwrxxrxxrx.png" alt="Case 1">
       <p class="status-label"></p>
     </div>
 
-    <div class="case" data-id="1" onclick="toggleCaseStatus(this)">
+    <div class="case" onclick="toggleCaseStatus(this, 1)">
       <h2>Case 2</h2>
       <div class="meta">
-        <p><strong>Step:</strong> F2L</p>
-        <p><strong>Algorithm:</strong> <span class="algo">F' U' F</span></p>
+        <p><strong>Algorithm:</strong> <span class="algo">(U F' U) (F U' F') U' F</span></p>
       </div>
-      <img src="https://solvethecube.com/img/cubes/xxxryxxxbxxwxbxxbxrxxxrxxrx.png" alt="F2L Case 2">
+      <img src="https://solvethecube.com/img/cubes/xxxxyxxrbxbwxbxxbxrxxxrxxrx.png" alt="Case 2">
       <p class="status-label"></p>
     </div>
 
-    <div class="case" data-id="2" onclick="toggleCaseStatus(this)">
+    <div class="case" onclick="toggleCaseStatus(this, 2)">
       <h2>Case 3</h2>
       <div class="meta">
-        <p><strong>Step:</strong> F2L</p>
-        <p><strong>Algorithm:</strong> <span class="algo">U R U' R'</span></p>
+        <p><strong>Algorithm:</strong> <span class="algo">(U' R U) (R' U R) U R'</span></p>
       </div>
-      <img src="https://solvethecube.com/img/cubes/xxxxybxxbxxwxbxxbxrrxxrxxrx.png" alt="F2L Case 3">
+      <img src="https://solvethecube.com/img/cubes/xxxbyxxxrxxbxbxxbxwxxxrxxrx.png" alt="Case 3">
       <p class="status-label"></p>
     </div>
 
-    <div class="case" data-id="3" onclick="toggleCaseStatus(this)">
+    <div class="case" onclick="toggleCaseStatus(this, 3)">
       <h2>Case 4</h2>
       <div class="meta">
-        <p><strong>Step:</strong> F2L</p>
-        <p><strong>Algorithm:</strong> <span class="algo">U' F' U F</span></p>
+        <p><strong>Algorithm:</strong> <span class="algo">(U F' U') (F U' F') U' F</span></p>
       </div>
-      <img src="https://solvethecube.com/img/cubes/xxxxyxxrrxbbxbxxbxwxxxrxxrx.png" alt="F2L Case 4">
+      <img src="https://solvethecube.com/img/cubes/xrxxyxxxbxxwxbxxbxrxxxrxxrx.png" alt="Case 4">
+      <p class="status-label"></p>
+    </div>
+
+    <div class="case" onclick="toggleCaseStatus(this, 4)">
+      <h2>Case 5</h2>
+      <div class="meta">
+        <p><strong>Algorithm:</strong> <span class="algo">d (R' U2 R) d' (R U R')</span></p>
+      </div>
+      <img src="https://solvethecube.com/img/cubes/xxxxyxxbrxrbxbxxbxwxxxrxxrx.png" alt="Case 5">
+      <p class="status-label"></p>
+    </div>
+
+    <div class="case" onclick="toggleCaseStatus(this, 5)">
+      <h2>Case 6</h2>
+      <div class="meta">
+        <p><strong>Algorithm:</strong> <span class="algo">U' (R U2 R') d (R' U' R)</span></p>
+      </div>
+      <img src="https://solvethecube.com/img/cubes/xxxxyrxxbxxwxbxxbxrbxxrxxrx.png" alt="Case 6">
+      <p class="status-label"></p>
+    </div>
+
+    <div class="case" onclick="toggleCaseStatus(this, 6)">
+      <h2>Case 7</h2>
+      <div class="meta">
+        <p><strong>Algorithm:</strong> <span class="algo">(R U' R' U) d (R' U' R)</span></p>
+      </div>
+      <img src="https://solvethecube.com/img/cubes/xxxxyrxxrxxbxbxxbxwbxxrxxrx.png" alt="Case 7">
+      <p class="status-label"></p>
+    </div>
+
+    <div class="case" onclick="toggleCaseStatus(this, 7)">
+      <h2>Case 8</h2>
+      <div class="meta">
+        <p><strong>Algorithm:</strong> <span class="algo">(F' U F U') d' (F U F')</span></p>
+      </div>
+      <img src="https://solvethecube.com/img/cubes/xxxxyxxbbxrwxbxxbxrxxxrxxrx.png" alt="Case 8">
+      <p class="status-label"></p>
+    </div>
+
+    <div class="case" onclick="toggleCaseStatus(this, 8)">
+      <h2>Case 9</h2>
+      <div class="meta">
+        <p><strong>Algorithm:</strong> <span class="algo">(U F' U2 F) (U F' U2 F)</span></p>
+      </div>
+      <img src="https://solvethecube.com/img/cubes/xrxxyxxxrxxbxbxxbxwxxxrxxrx.png" alt="Case 9">
+      <p class="status-label"></p>
+    </div>
+
+    <div class="case" onclick="toggleCaseStatus(this, 9)">
+      <h2>Case 10</h2>
+      <div class="meta">
+        <p><strong>Algorithm:</strong> <span class="algo">(U' R U2 R') (U' R U2 R')</span></p>
+      </div>
+      <img src="https://solvethecube.com/img/cubes/xxxbyxxxbxxwxbxxbxrxxxrxxrx.png" alt="Case 10">
+      <p class="status-label"></p>
+    </div>
+
+    <div class="case" onclick="toggleCaseStatus(this, 10)">
+      <h2>Case 11</h2>
+      <div class="meta">
+        <p><strong>Algorithm:</strong> <span class="algo">(U F' U' F) (U F' U2 F)</span></p>
+      </div>
+      <img src="https://solvethecube.com/img/cubes/xxxryxxxrxxbxbxxbxwxxxrxxrx.png" alt="Case 11">
+      <p class="status-label"></p>
+    </div>
+
+    <div class="case" onclick="toggleCaseStatus(this, 11)">
+      <h2>Case 12</h2>
+      <div class="meta">
+        <p><strong>Algorithm:</strong> <span class="algo">(U' R U R') (U' R U2 R')</span></p>
+      </div>
+      <img src="https://solvethecube.com/img/cubes/xbxxyxxxbxxwxbxxbxrxxxrxxrx.png" alt="Case 12">
       <p class="status-label"></p>
     </div>
 
